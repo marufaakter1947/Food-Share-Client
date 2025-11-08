@@ -6,7 +6,7 @@ import Navbar from '../Components/Navbar';
 
 const MainLayout = () => {
     return (
-         <div>
+         <div className='bg-[#F5F5F5]'>
       <div className="max-w-7xl mx-auto">
         <Navbar />
         <div className="mt-4">

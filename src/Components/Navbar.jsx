@@ -71,8 +71,8 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to={"/all-models"}>
-                <IoLogoModelS /> All Models
+              <NavLink to={"/available-foods"}>
+                <IoFastFoodSharp /> Available Foods
               </NavLink>
             </li>
           </ul>
@@ -163,7 +163,7 @@ const Navbar = () => {
               <li>
                 <button
                   onClick={signOutUser}
-                  className="btn btn-xs text-left bg-linear-to-r from-pink-500 to-red-500 text-white"
+                  className="btn rounded border-gray-300  btn-sm bg-linear-to-r from-[#BC1823] to-red-500 text-white"
                 >
                   <IoLogOut /> Logout
                 </button>
@@ -172,7 +172,7 @@ const Navbar = () => {
           </div>
         ) : (
           <Link
-            to={"/auth/login"}
+            to={"/login"}
             className="btn rounded border-gray-300  btn-sm bg-linear-to-r from-[#BC1823] to-red-500 text-white"
           >
             {" "}
