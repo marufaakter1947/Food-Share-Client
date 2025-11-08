@@ -70,7 +70,7 @@ const Login = () => {
 
         <button
           onClick={handleGoogleSignIn}
-          className="btn rounded border-gray-300 btn-sm bg-linear-to-r from-[#BC1823] to-red-500 text-white"
+          className="btn rounded border-gray-300 btn-sm  "
         >
           <FcGoogle size={20} />
           Continue with Google
