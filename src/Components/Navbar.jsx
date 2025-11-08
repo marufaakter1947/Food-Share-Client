@@ -78,7 +78,7 @@ const Navbar = () => {
           </ul>
         </div>
         <Link to={"/"} className="flex items-center justify-center gap-1">
-          <img className="h-8" src={logoImage} alt="" />
+          <img className="h-8 rounded-full" src={logoImage} alt="" />
           <img className="h-4" src={FoodShare} alt="" />
         </Link>
       </div>
