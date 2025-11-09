@@ -4,6 +4,7 @@ import { AuthContext } from "../Context/AuthContext";
 import { FaUsers, FaStar, FaCalendarAlt } from "react-icons/fa";
 import { IoLocationSharp } from "react-icons/io5";
 import { toast } from "react-hot-toast";
+import Loading from "./Loading";
 
 const FoodDetails = () => {
   const { id } = useParams();
@@ -20,7 +21,7 @@ const FoodDetails = () => {
       });
   }, [id]);
 
-  if (loading) return <p className="text-center mt-20">Loading...</p>;
+  if (loading) return <Loading></Loading> ;
 
   const {
     food_image,
