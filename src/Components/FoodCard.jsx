@@ -1,7 +1,9 @@
 import React from "react";
+import { Link } from "react-router";
 
 const FoodCard = ({ food }) => {
   const {
+    _id,
     food_image,
     food_name,
     donator_name,
@@ -20,34 +22,31 @@ const FoodCard = ({ food }) => {
         />
       </figure>
       <div className="card-body">
-        <h2 className="card-title">{food_name}</h2>
-        <div className="badge text-xs badge-xs badge-secondary rounded-full">
-          {food_quantity}
+        <h2 className="card-title text-[#BC1823]">{food_name}</h2>
+        <div className=" text-xs   flex justify-between items-center border-gray-300  border-b pb-1 font-semibold">Quantity:
+          <span>{food_quantity}</span>
         </div>
-        <div className="text-xs text-secondary">{donator_name}</div>
-        <p className="line-clamp-1">{pickup_location}</p>
-        {/* <p className="text-sm text-base-content/70">by {author}</p> */}
-        <div className="card-actions justify-between items-center mt-4">
-          <div className="flex gap-4 text-sm text-base-content/60">
-            {/* <span className="flex items-center gap-1">
-              <Eye className="w-4 h-4" />
-              {views}
-            </span> */}
-            {/* <span className="flex items-center gap-1">
-              <Heart className="w-4 h-4" />
-              {likes}
-            </span> */}
-          </div>
-          {/* <Link
-            to={`/model-details/${_id}`}
-            className="btn rounded-full bg-linear-to-r from-pink-500 to-red-600 hover:from-red-600 hover:to-pink-500 text-white w-full btn-sm"
+        <div className=" text-xs   flex justify-between items-center border-gray-300  border-b pb-1 font-semibold">Pickup Location:
+          <span className="font-normal">{pickup_location}</span>
+        </div>
+        <div className=" text-xs   flex justify-between items-center border-gray-300  border-b pb-1 font-semibold">Expires:
+          <span className="text-[#BC1823] font-medium">{expire_date}</span>
+        </div>
+        <div className="text-[13px] font-medium flex gap-2 items-center">
+            <img src={donator_image} alt="" className="w-10 h-10 rounded-full   object-contain object-center shadow-none transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400 " />
+            <span >Donator:{donator_name}</span></div>
+        
+       
+          <Link
+            to={`/food-details/${_id}`}
+            className="btn rounded bg-linear-to-r from-[#BC1823] to-red-500 text-white w-full btn-sm"
           >
-            View
-          </Link> */}
+            View Details
+          </Link>
         </div>
       </div>
-    </div>
+    
   );
 };
-
+ 
 export default FoodCard;
