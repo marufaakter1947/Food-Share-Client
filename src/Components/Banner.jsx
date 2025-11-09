@@ -13,7 +13,7 @@ const Banner = () => {
   return (
     <section className="w-full max-w-7xl mx-auto rounded overflow-hidden shadow-2xl font-sans">
       <div className="flex flex-col md:flex-row h-auto md:h-[500px]">
-        <div className="w-full md:w-3/5 p-8 sm:p-12 md:p-16 flex flex-col justify-center  bg-white">
+        <div className="w-full md:w-3/5 p-8 sm:p-12 md:p-16 flex flex-col justify-center  bg-linear-to-b from-[#f6dada] to-[#ffeaea]">
           <div className="mb-4 animate-heartbeat text-[#BC1823] text-4xl flex items-center">
             <span role="img" aria-label="heart" className="mr-1 ">
               <FaHandHoldingHeart />
