@@ -1,43 +1,17 @@
-// import React from 'react';
-
-// const Navbar = () => {
-//     return (
-//         <div>
-//             Navbar
-//         </div>
-//     );
-// };
-
-// export default Navbar;
-
 import { Link, NavLink } from "react-router";
-import { IoLogoModelS } from "react-icons/io";
+
 import { GoHomeFill } from "react-icons/go";
 import { IoFastFoodSharp, IoLogIn, IoLogOut } from "react-icons/io5";
-import { FaGear, FaUser } from "react-icons/fa6";
-import { LuRotate3D } from "react-icons/lu";
-import { ImBoxAdd } from "react-icons/im";
+
 import { use } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import FoodShare from "../assets/Foodshare_Logo.png";
 import logoImage from "../assets/Logo.png";
-// import { AuthContext } from "../context/AuthContext";
+import { MdFoodBank } from "react-icons/md";
+import { BiFoodMenu, BiSolidFoodMenu } from "react-icons/bi";
 
 const Navbar = () => {
   const { user, signOutUser } = use(AuthContext);
-  //    const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
-
-  // console.log(user?.accessToken)
-
-  //    useEffect(() => {
-  //     const html = document.querySelector("html");
-  //     html.setAttribute("data-theme", theme);
-  //     localStorage.setItem("theme", theme);
-  //   }, [theme]);
-
-  //   const handleTheme = (checked) => {
-  //     setTheme(checked ? "dark" : "light");
-  //   };
 
   return (
     <div className="navbar py-0 min-h-0 z-1 shadow-sm  glass-card max-w-7xl">
@@ -95,13 +69,6 @@ const Navbar = () => {
               <IoFastFoodSharp /> Available Foods
             </NavLink>
           </li>
-          
-          {/* 
-          <li>
-            <NavLink to={"/profile"}>
-              <FaUser /> Profile
-            </NavLink>
-          </li> */}
         </ul>
       </div>
       <div className="navbar-end gap-3">
@@ -131,39 +98,26 @@ const Navbar = () => {
                 <li className="text-sm font-bold">{user.displayName}</li>
                 <li className="text-xs">{user.email}</li>
               </div>
-              <li className="mt-3">
-                <Link to={"/profile"}>
-                  <FaUser /> Profile
+              <li className="mt-1">
+                <Link to={"/add-food"}>
+                  <MdFoodBank /> Add Food
                 </Link>
               </li>
-              <li className="mt-3">
-                <Link to={"/my-models"}>
-                  <FaUser /> My Models
+              <li className="mt-1">
+                <Link to={"/manage-my-foods"}>
+                  <BiFoodMenu /> Manage My Foods
                 </Link>
               </li>
-              <li className="mt-3">
-                <Link to={"/my-downloads"}>
-                  <FaUser /> My Downloads
+              <li className="mt-1">
+                <Link to={"/my-food-request"}>
+                  <BiSolidFoodMenu /> My Food Request
                 </Link>
               </li>
 
-              {/* <input
-                onChange={(e) => handleTheme(e.target.checked)}
-                type="checkbox"
-                defaultChecked={localStorage.getItem("theme") === "dark"}
-                className="toggle"
-              /> */}
-
-              <li>
-                <a>
-                  {" "}
-                  <FaGear /> Settings
-                </a>
-              </li>
               <li>
                 <button
                   onClick={signOutUser}
-                  className="btn rounded border-gray-300  btn-sm bg-linear-to-r from-[#BC1823] to-red-500 text-white"
+                  className="btn rounded mt-1 border-gray-300  btn-sm bg-linear-to-r from-[#BC1823] to-red-500 text-white"
                 >
                   <IoLogOut /> Logout
                 </button>
