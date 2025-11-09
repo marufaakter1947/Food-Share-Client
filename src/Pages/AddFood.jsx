@@ -19,20 +19,20 @@ const AddFood = () => {
       const expire_date = form.expire_date.value;
       const additional_notes = form.additional_notes.value.trim();
 
-    // console.log({form,food_name,foodImg,food_quantity,pickup_location,expire_date,additional_notes})
-    const payload = {
-  food_name,
-  food_image: foodImg,
-  food_quantity,
-  pickup_location,
-  expire_date,
-  additional_notes,
-  donator_name: user?.displayName ,
-  donator_email: user?.email ,
-  donator_image: user?.photoURL ,
-  food_status: "Available",
-  createdAt: new Date().toISOString(),
-};
+      // console.log({form,food_name,foodImg,food_quantity,pickup_location,expire_date,additional_notes})
+      const payload = {
+        food_name,
+        food_image: foodImg,
+        food_quantity,
+        pickup_location,
+        expire_date,
+        additional_notes,
+        donator_name: user?.displayName,
+        donator_email: user?.email,
+        donator_image: user?.photoURL,
+        food_status: "Available",
+        createdAt: new Date().toISOString(),
+      };
 
       const res = await fetch("http://localhost:3000/all-foods", {
         method: "POST",
@@ -83,7 +83,7 @@ const AddFood = () => {
               name="food_quantity"
               type="text"
               className="input rounded focus:border-0 focus:outline-gray-200 w-full"
-              placeholder='Serves 2 people'
+              placeholder="Serves 2 people"
               required
             />
 
@@ -111,21 +111,6 @@ const AddFood = () => {
               className="textarea rounded focus:border-0 focus:outline-gray-200 w-full"
               placeholder="Any Notes about this Food!"
             />
-
-            <div className="mt-2 p-2 border rounded bg-gray-50">
-              <p className="text-sm font-semibold">Donator</p>
-              <div className="flex items-center gap-3 mt-2">
-                <img
-                  src={user?.photoURL || "https://i.ibb.co/d4MHvf8v/f6.jpg"}
-                  alt="donator"
-                  className="w-12 h-12 rounded-full object-cover border"
-                />
-                <div className="text-sm">
-                  <div className="font-medium">{user?.displayName || "Anonymous"}</div>
-                  <div className="text-gray-500 text-xs">{user?.email || "no-email@example.com"}</div>
-                </div>
-              </div>
-            </div>
 
             <button
               type="submit"
