@@ -1,4 +1,3 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import { FaHeart, FaLeaf, FaHandsHelping } from "react-icons/fa";
@@ -12,7 +11,7 @@ const OurMission = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-         Our Mission
+        Our Mission
       </motion.h2>
 
       <motion.p
@@ -26,7 +25,6 @@ const OurMission = () => {
         a circle of kindness, care, and sustainability.
       </motion.p>
 
-      
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10 max-w-4xl mx-auto">
         <motion.div
           className="bg-white rounded-2xl shadow-sm p-6 hover:shadow-xl transition-all duration-300"
@@ -63,4 +61,3 @@ const OurMission = () => {
 };
 
 export default OurMission;
-

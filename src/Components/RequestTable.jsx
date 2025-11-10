@@ -1,4 +1,3 @@
-
 import React from "react";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router";
@@ -121,14 +120,14 @@ const RequestTable = ({ requests, setRequests, onFoodDonated, loading }) => {
                 onClick={() =>
                   handleUpdateStatus(req._id, "accepted", req.food_id)
                 }
-                className="bg-teal-600 text-white px-3 py-1 rounded"
+                className="bg-teal-600 text-white px-3 py-1 rounded cursor-pointer"
                 disabled={req.status !== "pending"}
               >
                 Accept
               </button>
               <button
                 onClick={() => handleUpdateStatus(req._id, "rejected")}
-                className="bg-red-500 text-white px-3 py-1 rounded"
+                className="bg-red-500 text-white px-3 py-1 rounded cursor-pointer"
                 disabled={req.status !== "pending"}
               >
                 Reject

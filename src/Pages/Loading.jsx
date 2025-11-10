@@ -1,10 +1,10 @@
-import React from 'react';
-import { CircleLoader } from 'react-spinners';
+import React from "react";
+import { CircleLoader } from "react-spinners";
 
 const Loading = () => {
-     return (
+  return (
     <div className="min-h-[50vh] flex justify-center items-center">
-     <CircleLoader></CircleLoader>
+      <CircleLoader></CircleLoader>
     </div>
   );
 };

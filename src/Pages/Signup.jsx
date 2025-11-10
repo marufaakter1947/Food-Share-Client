@@ -1,6 +1,3 @@
-
-
-
 import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
@@ -12,8 +9,13 @@ import { auth } from "../Firebase/Firebase.config";
 const Signup = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
-  const { createUser, updateUserProfile, signInWithGoogle, setUser, setLoading } =
-    useContext(AuthContext);
+  const {
+    createUser,
+    updateUserProfile,
+    signInWithGoogle,
+    setUser,
+    setLoading,
+  } = useContext(AuthContext);
 
   const location = useLocation();
   const from = location.state || "/";
@@ -28,7 +30,7 @@ const Signup = () => {
     const password = e.target.password.value;
 
     // console.log(displayName,photoURL,email,password);
-    
+
     if (password.length < 6) {
       toast.error("Length must be at least 6 characters.");
       return setIsSubmitting(false);

@@ -21,7 +21,6 @@ const FoodDetails = () => {
   });
   const navigate = useNavigate();
 
-  
   useEffect(() => {
     setLoading(true);
     fetch(`http://localhost:3000/all-foods/${id}`)
@@ -61,7 +60,6 @@ const FoodDetails = () => {
       .finally(() => setLoading(false));
   }, [id, navigate, user?.email]);
 
-  
   useEffect(() => {
     if (food && user?.email === food.donator_email) {
       fetch(
@@ -183,7 +181,7 @@ const FoodDetails = () => {
 
           <button
             onClick={() => setShowModal(true)}
-            className="w-full bg-linear-to-r from-[#BC1823] to-red-500 text-white py-2 rounded mt-4"
+            className="w-full bg-linear-to-r from-[#BC1823] to-red-500 text-white py-2 rounded mt-4 cursor-pointer"
           >
             Request Food
           </button>
@@ -244,7 +242,7 @@ const FoodDetails = () => {
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="w-full border border-gray-400 text-gray-600 py-2 rounded mt-2"
+                  className="w-full border border-gray-400 text-gray-600 py-2 rounded mt-2 cursor-pointer"
                 >
                   Cancel
                 </button>

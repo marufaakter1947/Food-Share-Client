@@ -1,27 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import { useLoaderData } from 'react-router';
-import FoodCard from '../Components/FoodCard';
-import Loading from './Loading';
+import React, { useEffect, useState } from "react";
+import { useLoaderData } from "react-router";
+import FoodCard from "../Components/FoodCard";
+import Loading from "./Loading";
 
 const AvailableFoods = () => {
-    const data = useLoaderData();
+  const data = useLoaderData();
   // console.log(data);
   const [foods, setFoods] = useState(data);
-const [loading, setLoading] = useState(true);
-useEffect(() => {
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
     if (data) {
-        const availableFoods = data.filter(food => food.food_status === "Available");
+      const availableFoods = data.filter(
+        (food) => food.food_status === "Available"
+      );
       setFoods(availableFoods);
-    
+
       setLoading(false);
     }
   }, [data]);
-    return (
-        <div>
-      <div className="text-2xl text-center font-bold mt-10 mb-2"> All Foods</div>
+  return (
+    <div>
+      <div className="text-2xl text-center font-bold mt-10 mb-2">
+        {" "}
+        All Foods
+      </div>
       <p className=" text-center mb-10 ">Explore all available Foods</p>
       {loading ? (
-        <Loading /> 
+        <Loading />
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
           {foods.map((food) => (
@@ -30,7 +35,7 @@ useEffect(() => {
         </div>
       )}
     </div>
-    );
+  );
 };
 
 export default AvailableFoods;

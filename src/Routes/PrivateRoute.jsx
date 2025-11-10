@@ -7,7 +7,11 @@ const PrivateRoute = ({ children }) => {
   const { user, loading } = use(AuthContext);
 
   if (loading) {
-    return <div><CircleLoader /></div>;
+    return (
+      <div>
+        <CircleLoader />
+      </div>
+    );
   }
 
   if (!user) {
