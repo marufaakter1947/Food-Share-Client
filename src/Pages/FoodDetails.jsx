@@ -235,7 +235,7 @@ const FoodDetails = () => {
                 </div>
                 <button
                   type="submit"
-                  className="w-full bg-linear-to-r from-[#BC1823] to-red-500 text-white py-2 rounded mt-2"
+                  className="w-full bg-linear-to-r from-[#BC1823] to-red-500 text-white py-2 rounded mt-2 cursor-pointer"
                 >
                   Submit Request
                 </button>

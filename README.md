@@ -1,6 +1,6 @@
 Name of my Website - FoodShare  
 
-Live site URL on client side - 
+Live site URL on client side - https://food-share-client-by-marufa.netlify.app/
 
 ##Features:
 
