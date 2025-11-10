@@ -1,10 +1,12 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
 
 const AddFood = () => {
   const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate(); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -44,6 +46,9 @@ const AddFood = () => {
       if (!res.ok) throw new Error(result.message || "Server error");
 
       toast.success("Food added successfully!");
+      setTimeout(() => {
+        navigate("/available-foods");
+      }, 1000);
       form.reset();
     } catch (err) {
       console.error(err);
