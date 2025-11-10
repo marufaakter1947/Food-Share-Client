@@ -170,7 +170,7 @@ const FoodDetails = () => {
 
         <button
           onClick={() => setShowModal(true)}
-          className="w-full bg-linear-to-r from-[#BC1823] to-red-500 text-white font-medium py-2 rounded mt-4"
+          className="w-full bg-linear-to-r from-[#BC1823] to-red-500 text-white font-medium py-2 rounded mt-4 cursor-pointer"
         >
           Request Food
         </button>
@@ -227,14 +227,14 @@ const FoodDetails = () => {
 
               <button
                 type="submit"
-                className="w-full bg-linear-to-r from-[#BC1823] to-red-500 text-white py-2 rounded mt-2"
+                className="w-full bg-linear-to-r from-[#BC1823] to-red-500 text-white py-2 rounded mt-2 cursor-pointer"
               >
                 Submit Request
               </button>
               <button
                 type="button"
                 onClick={() => setShowModal(false)}
-                className="w-full border border-gray-400 text-gray-600 py-2 rounded mt-2"
+                className="w-full border border-gray-400 text-gray-600 py-2 rounded mt-2 cursor-pointer"
               >
                 Cancel
               </button>

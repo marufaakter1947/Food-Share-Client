@@ -84,14 +84,14 @@ const handleUpdateStatus = (id, newStatus, foodId = null) => {
                   onClick={() =>
                     handleUpdateStatus(req._id, "accepted", req.food_id)
                   }
-                  className="bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600"
+                  className="bg-teal-600 text-white px-2 py-1 rounded hover:bg-teal-700 cursor-pointer"
                   disabled={req.status !== "pending"}
                 >
                   Accept
                 </button>
                 <button
                   onClick={() => handleUpdateStatus(req._id, "rejected")}
-                  className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
+                  className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 cursor-pointer"
                   disabled={req.status !== "pending"}
                 >
                   Reject
