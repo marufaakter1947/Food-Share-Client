@@ -8,7 +8,7 @@ const FeaturedFoods = () => {
   // const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:3000/featured-foods")
+    fetch("https://food-share-server-rust.vercel.app/featured-foods")
       .then((res) => res.json())
       .then((data) => setFoods(data))
       .catch((err) => console.error(err));

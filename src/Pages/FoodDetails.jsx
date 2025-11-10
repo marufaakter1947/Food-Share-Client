@@ -23,7 +23,7 @@ const FoodDetails = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`http://localhost:3000/all-foods/${id}`)
+    fetch(`https://food-share-server-rust.vercel.app/all-foods/${id}`)
       .then((res) => {
         if (!res.ok) throw new Error("Food not found");
         return res.json();
@@ -38,7 +38,7 @@ const FoodDetails = () => {
           // Fetch requests **for this food** (donator only)
           if (user?.email === data.donator_email) {
             fetch(
-              `http://localhost:3000/food-requests?donator_email=${user.email}`
+              `https://food-share-server-rust.vercel.app/food-requests?donator_email=${user.email}`
             )
               .then((res) => res.json())
               .then((reqs) => {
@@ -63,7 +63,7 @@ const FoodDetails = () => {
   useEffect(() => {
     if (food && user?.email === food.donator_email) {
       fetch(
-        `http://localhost:3000/food-requests?donator_email=${user.email}&food_id=${food._id}`
+        `https://food-share-server-rust.vercel.app/food-requests?donator_email=${user.email}&food_id=${food._id}`
       )
         .then((res) => res.json())
         .then((data) => setRequests(data))
@@ -112,7 +112,7 @@ const FoodDetails = () => {
       request_date: new Date().toISOString(),
     };
 
-    fetch(`http://localhost:3000/my-food-request`, {
+    fetch(`https://food-share-server-rust.vercel.app/my-food-request`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(requestData),

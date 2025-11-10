@@ -7,7 +7,7 @@ const RequestTable = ({ requests, setRequests, onFoodDonated, loading }) => {
   const navigate = useNavigate();
 
   const handleUpdateStatus = (id, newStatus, foodId = null) => {
-    fetch(`http://localhost:3000/update-request/${id}`, {
+    fetch(`https://food-share-server-rust.vercel.app/update-request/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status: newStatus, foodId }),

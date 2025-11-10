@@ -36,11 +36,14 @@ const AddFood = () => {
         createdAt: new Date().toISOString(),
       };
 
-      const res = await fetch("http://localhost:3000/all-foods", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+      const res = await fetch(
+        "https://food-share-server-rust.vercel.app/all-foods",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
 
       const result = await res.json();
       if (!res.ok) throw new Error(result.message || "Server error");
