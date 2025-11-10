@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../Context/AuthContext";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const { signInUser, signInWithGoogle } = useContext(AuthContext);
@@ -21,7 +22,7 @@ const Login = () => {
         navigate(location.state || "/");
       })
       .catch((error) => {
-        console.log(error.message);
+       toast.error(error.message);
       });
   };
 
@@ -32,7 +33,7 @@ const Login = () => {
         navigate(location?.state || "/");
       })
       .catch((error) => {
-        console.log(error.message);
+        toast.error(error.message);
       });
   };
 

@@ -51,7 +51,7 @@ const AddFood = () => {
       }, 1000);
       form.reset();
     } catch (err) {
-      console.error(err);
+      toast.error(err.message);
       toast.error(err.message || "Something went wrong");
     } finally {
       setLoading(false);
