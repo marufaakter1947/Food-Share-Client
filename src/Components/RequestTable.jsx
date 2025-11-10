@@ -2,13 +2,15 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { toast } from "react-hot-toast";
 import Loading from "../Pages/Loading";
+import { useNavigate } from "react-router";
 
-const RequestTable = () => {
+const RequestTable = ({onFoodDonated}) => {
   const { user } = useContext(AuthContext);
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
-  // Fetch all requests where the logged-in user is the food owner
+  // Fetch all requests
   useEffect(() => {
     if (user?.email) {
       fetch(`http://localhost:3000/food-requests?donator_email=${user.email}`)
@@ -21,26 +23,33 @@ const RequestTable = () => {
     }
   }, [user?.email]);
 
-  // Handle Accept / Reject
-  const handleUpdateStatus = (id, newStatus, foodId = null) => {
-    // Update request status
-    fetch(`http://localhost:3000/update-request/${id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ status: newStatus, foodId }),
+  
+
+const handleUpdateStatus = (id, newStatus, foodId = null) => {
+  fetch(`http://localhost:3000/update-request/${id}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ status: newStatus, foodId }),
+  })
+    .then((res) => res.json())
+    .then(() => {
+      toast.success(`Request ${newStatus}`);
+      setRequests((prev) =>
+        prev.map((r) => (r._id === id ? { ...r, status: newStatus } : r))
+      );
+
+      if (newStatus === "accepted" && foodId) {
+
+        if (onFoodDonated) onFoodDonated(foodId);
+
+        
+        setTimeout(() => {
+          navigate("/available-foods");
+        }, 1000);
+      }
     })
-      .then((res) => res.json())
-      .then(() => {
-        toast.success(`Request ${newStatus}`);
-        // Update local state
-        setRequests((prev) =>
-          prev.map((r) =>
-            r._id === id ? { ...r, status: newStatus } : r
-          )
-        );
-      })
-      .catch((err) => toast.error(err.message));
-  };
+    .catch((err) => toast.error(err.message));
+};
 
   if (loading) return <Loading></Loading>;
 

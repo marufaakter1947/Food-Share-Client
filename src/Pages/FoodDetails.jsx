@@ -1,18 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router";
+import {  useParams } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
 import { FaUsers, FaCalendarAlt } from "react-icons/fa";
 import { IoLocationSharp } from "react-icons/io5";
 import { toast } from "react-hot-toast";
 import Loading from "./Loading";
 import RequestTable from "../Components/RequestTable";
-import { div } from "framer-motion/client";
+// import { div } from "framer-motion/client";
 
 const FoodDetails = () => {
   const { id } = useParams();
   const { user } = useContext(AuthContext);
   const [food, setFood] = useState(null);
   const [loading, setLoading] = useState(true);
+    // const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({
     location: "",
@@ -29,7 +30,26 @@ const FoodDetails = () => {
       });
   }, [id]);
 
+// useEffect(() => {
+//     fetch(`http://localhost:3000/all-foods/${id}`)
+//       .then((res) => res.json())
+//       .then((data) => {
+//         setFood(data);
+//         setLoading(false);
+
+//         if (!data || data.food_status === "donated") {
+//           toast.error("This food has already been donated!");
+//           navigate("/available-foods");
+//         }
+//       })
+//       .catch(() => {
+//         toast.error("Food not found!");
+//         navigate("/available-foods");
+//       });
+//   }, [id, navigate]);
+
   if (loading) return <Loading />;
+  if (!food) return <p className="text-center mt-10">This food has been donated.</p>;
 
   const {
     _id,
@@ -232,7 +252,7 @@ const FoodDetails = () => {
     <h2 className="text-2xl font-semibold text-[#BC1823] mb-4 text-center">
       Food Requests
     </h2>
-    <RequestTable />
+    <RequestTable onFoodDonated={() => setFood(null)} />
   </div>
 )}
         </div>
