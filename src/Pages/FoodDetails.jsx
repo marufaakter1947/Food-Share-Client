@@ -5,6 +5,8 @@ import { FaUsers, FaCalendarAlt } from "react-icons/fa";
 import { IoLocationSharp } from "react-icons/io5";
 import { toast } from "react-hot-toast";
 import Loading from "./Loading";
+import RequestTable from "../Components/RequestTable";
+import { div } from "framer-motion/client";
 
 const FoodDetails = () => {
   const { id } = useParams();
@@ -84,7 +86,9 @@ const FoodDetails = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto bg-white shadow-sm rounded-lg p-6 md:flex gap-8 mt-8">
+    <div>
+        <div>
+<div className="max-w-6xl mx-auto bg-white shadow-sm rounded-lg p-6 md:flex gap-8 mt-8">
       <div className="md:w-1/3 flex justify-center items-center">
         <img
           src={food_image}
@@ -218,6 +222,20 @@ const FoodDetails = () => {
           </div>
         </div>
       )}
+
+    </div>
+        </div>
+        <div>
+
+      {user?.email === donator_email && (
+  <div className="mt-8">
+    <h2 className="text-2xl font-semibold text-[#BC1823] mb-4 text-center">
+      Food Requests
+    </h2>
+    <RequestTable />
+  </div>
+)}
+        </div>
     </div>
   );
 };

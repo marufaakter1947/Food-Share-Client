@@ -10,7 +10,9 @@ const AvailableFoods = () => {
 const [loading, setLoading] = useState(true);
 useEffect(() => {
     if (data) {
-      setFoods(data);
+        const availableFoods = data.filter(food => food.food_status === "Available");
+      setFoods(availableFoods);
+    
       setLoading(false);
     }
   }, [data]);
