@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
 import Swal from "sweetalert2";
+import Loading from "./Loading";
 
 const UpdateFood = () => {
   const { id } = useParams();
@@ -43,7 +44,7 @@ const UpdateFood = () => {
       });
   };
 
-  if (!food) return <p className="text-center mt-10">Loading...</p>;
+  if (!food) return <Loading></Loading>;
 
   return (
     <div className="max-w-lg mx-auto bg-white shadow-lg p-6 rounded-lg mt-10">

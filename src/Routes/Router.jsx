@@ -13,13 +13,14 @@ import PrivateRoute from "./PrivateRoute";
 import FoodDetails from "../Pages/FoodDetails";
 import UpdateFood from "../Pages/UpdateFood";
 import FeaturedFoods from "../Components/FeaturedFoods";
+import Loading from "../Pages/Loading";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
     errorElement: <ErrorPage></ErrorPage>,
-    hydrateFallbackElement: <p>Loading...</p>,
+    hydrateFallbackElement: <Loading></Loading>,
     children: [
       {
         index: true,
