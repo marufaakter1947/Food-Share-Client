@@ -5,24 +5,21 @@ import Loading from "../Pages/Loading";
 
 const FeaturedFoods = () => {
   const [foods, setFoods] = useState([]);
-    // const [loading, setLoading] = useState(true);
-  
+  // const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:3000/featured-foods")
+    fetch("https://food-share-server-rust.vercel.app/featured-foods")
       .then((res) => res.json())
       .then((data) => setFoods(data))
       .catch((err) => console.error(err));
   }, []);
 
-  
-
   return (
     <div className="my-15">
       <h2 className="text-3xl font-bold text-center mb-2 ">Featured Foods</h2>
-       <p className="text-center mb-10 ">
-        Explore the most generous foods - freshly prepared and ready to
-        share with those in need.
+      <p className="text-center mb-10 ">
+        Explore the most generous foods - freshly prepared and ready to share
+        with those in need.
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-5">

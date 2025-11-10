@@ -13,7 +13,9 @@ const RequestTable = ({ onFoodDonated }) => {
   // Fetch all requests
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:3000/food-requests?donator_email=${user.email}`)
+      fetch(
+        `https://food-share-server-rust.vercel.app/food-requests?donator_email=${user.email}`
+      )
         .then((res) => res.json())
         .then((data) => {
           setRequests(data);
@@ -24,7 +26,7 @@ const RequestTable = ({ onFoodDonated }) => {
   }, [user?.email]);
 
   const handleUpdateStatus = (id, newStatus, foodId = null) => {
-    fetch(`http://localhost:3000/update-request/${id}`, {
+    fetch(`https://food-share-server-rust.vercel.app/update-request/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status: newStatus, foodId }),

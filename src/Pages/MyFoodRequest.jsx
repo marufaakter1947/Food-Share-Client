@@ -1,32 +1,36 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../Context/AuthContext';
-import Loading from './Loading';
-import FoodCard from '../Components/FoodCard';
+import React, { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../Context/AuthContext";
+import Loading from "./Loading";
+import FoodCard from "../Components/FoodCard";
 
 const MyFoodRequest = () => {
-    const { user } = useContext(AuthContext);
-      const [myFoods, setMyFoods] = useState([]);
-      const [loading, setLoading] = useState(true);
+  const { user } = useContext(AuthContext);
+  const [myFoods, setMyFoods] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-      useEffect(() => {
-          if (user?.email) {
-            fetch(`http://localhost:3000/my-requests?email=${user.email}`)
-              .then((res) => res.json())
-              .then((data) => {
-                setMyFoods(data);
-                setLoading(false);
-              })
-              .catch(() => setLoading(false));
-          }
-        }, [user?.email]);
+  useEffect(() => {
+    if (user?.email) {
+      fetch(
+        `https://food-share-server-rust.vercel.app/my-requests?email=${user.email}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          setMyFoods(data);
+          setLoading(false);
+        })
+        .catch(() => setLoading(false));
+    }
+  }, [user?.email]);
 
-        if (loading) return <Loading></Loading>;
-    return (
-        <div className="max-w-6xl mx-auto py-10 px-3">
+  if (loading) return <Loading></Loading>;
+  return (
+    <div className="max-w-6xl mx-auto py-10 px-3">
       <h2 className="text-2xl text-center font-bold  mb-2">
         My Food Request Collection
       </h2>
-      <p className='text-center mb-10'>A list of all the foods that i have requested from our community donors.</p>
+      <p className="text-center mb-10">
+        A list of all the foods that i have requested from our community donors.
+      </p>
 
       {myFoods.length === 0 ? (
         <p className="text-center text-gray-500">No requested foods found.</p>
@@ -38,7 +42,7 @@ const MyFoodRequest = () => {
         </div>
       )}
     </div>
-    );
+  );
 };
 
 export default MyFoodRequest;

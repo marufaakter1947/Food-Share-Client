@@ -10,7 +10,7 @@ const UpdateFood = () => {
 
   // Fetch existing data
   useEffect(() => {
-    fetch(`http://localhost:3000/all-foods/${id}`)
+    fetch(`https://food-share-server-rust.vercel.app/all-foods/${id}`)
       .then((res) => res.json())
       .then((data) => setFood(data));
   }, [id]);
@@ -26,7 +26,7 @@ const UpdateFood = () => {
       expire_date: form.expire_date.value,
     };
 
-    fetch(`http://localhost:3000/my-foods/${id}`, {
+    fetch(`https://food-share-server-rust.vercel.app/my-foods/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedFood),

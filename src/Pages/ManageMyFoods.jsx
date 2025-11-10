@@ -11,7 +11,9 @@ const ManageMyFoods = () => {
 
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:3000/my-foods?email=${user.email}`)
+      fetch(
+        `https://food-share-server-rust.vercel.app/my-foods?email=${user.email}`
+      )
         .then((res) => res.json())
         .then((data) => {
           setMyFoods(data);
@@ -32,7 +34,7 @@ const ManageMyFoods = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/my-foods/${id}`, {
+        fetch(`https://food-share-server-rust.vercel.app/my-foods/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -75,7 +77,10 @@ const ManageMyFoods = () => {
               </thead>
               <tbody>
                 {myFoods.map((food) => (
-                  <tr key={food._id} className="hover:bg-gray-50 border-3 border-gray-300">
+                  <tr
+                    key={food._id}
+                    className="hover:bg-gray-50 border-3 border-gray-300"
+                  >
                     <td>
                       <img
                         src={food.food_image}

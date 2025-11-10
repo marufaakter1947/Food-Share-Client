@@ -37,12 +37,12 @@ const router = createBrowserRouter([
       {
         path: "/available-foods",
         element: <AvailableFoods></AvailableFoods>,
-        loader: () => fetch(`http://localhost:3000/all-foods`),
+        loader: () =>
+          fetch(`https://food-share-server-rust.vercel.app/all-foods`),
       },
       {
         path: "/featured-foods",
         element: <FeaturedFoods></FeaturedFoods>,
-       
       },
       {
         path: "/food-details/:id",
