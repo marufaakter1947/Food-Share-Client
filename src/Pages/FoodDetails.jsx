@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
 import { FaUsers, FaStar, FaCalendarAlt } from "react-icons/fa";
@@ -8,7 +8,7 @@ import Loading from "./Loading";
 
 const FoodDetails = () => {
   const { id } = useParams();
-//   const {} = useContext(AuthContext);
+  const {user} = useContext(AuthContext);
   const [food, setFood] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -37,7 +37,22 @@ const FoodDetails = () => {
   } = food;
 
   const handleRequestFood = () => {
-    toast.success("Food request sent successfully!");
+    fetch(`http://localhost:3000/my-food-request`, {
+        method:"POST",
+        headers:{
+            "Content-Type": "application/json",
+        },
+        body:JSON.stringify({...food, requested_by: user.email})
+    })
+    .then(res=>res.json())
+    .then(data =>{
+        console.log(data)
+         toast.success("Food request sent successfully!");
+    })
+    .catch(err=>{
+        toast.error(err.message)
+    })
+    // toast.success("Food request sent successfully!");
   };
 
   return (
