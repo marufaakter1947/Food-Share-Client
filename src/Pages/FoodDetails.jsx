@@ -1,16 +1,22 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
-import { FaUsers, FaStar, FaCalendarAlt } from "react-icons/fa";
+import { FaUsers, FaCalendarAlt } from "react-icons/fa";
 import { IoLocationSharp } from "react-icons/io5";
 import { toast } from "react-hot-toast";
 import Loading from "./Loading";
 
 const FoodDetails = () => {
   const { id } = useParams();
-  const {user} = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [food, setFood] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+  const [formData, setFormData] = useState({
+    location: "",
+    reason: "",
+    contact: "",
+  });
 
   useEffect(() => {
     fetch(`http://localhost:3000/all-foods/${id}`)
@@ -21,9 +27,10 @@ const FoodDetails = () => {
       });
   }, [id]);
 
-  if (loading) return <Loading></Loading>;
+  if (loading) return <Loading />;
 
   const {
+    _id,
     food_image,
     food_name,
     donator_name,
@@ -36,23 +43,44 @@ const FoodDetails = () => {
     food_status,
   } = food;
 
-  const handleRequestFood = () => {
+  // Submit request form
+  const handleSubmitRequest = (e) => {
+    e.preventDefault();
+
+    const requestData = {
+      food_id: _id,
+      food_name,
+      food_image,
+      donator_name,
+      donator_email,
+      donator_image,
+      food_quantity,
+      expire_date,
+      requested_by: user.email,
+      requester_name: user.displayName,
+      requester_image: user.photoURL,
+      pickup_location: pickup_location,
+      requester_location: formData.location,
+      reason: formData.reason,
+      contact: formData.contact,
+      status: "pending",
+      request_date: new Date().toISOString(),
+    };
+
     fetch(`http://localhost:3000/my-food-request`, {
-        method:"POST",
-        headers:{
-            "Content-Type": "application/json",
-        },
-        body:JSON.stringify({...food, requested_by: user.email})
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestData),
     })
-    .then(res=>res.json())
-    .then(data =>{
-        console.log(data)
-         toast.success("Food request sent successfully!");
-    })
-    .catch(err=>{
-        toast.error(err.message)
-    })
-    // toast.success("Food request sent successfully!");
+      .then((res) => res.json())
+      .then(() => {
+        toast.success("Food request submitted successfully!");
+        setShowModal(false);
+        setFormData({ location: "", reason: "", contact: "" });
+      })
+      .catch((err) => toast.error(err.message));
   };
 
   return (
@@ -70,11 +98,12 @@ const FoodDetails = () => {
         <p className="font-medium text-green-800">
           Food Status: <span className="ml-1">{food_status}</span>
         </p>
+
         <div className="flex items-center gap-3 mb-2">
           <img
             src={donator_image}
             alt={donator_name}
-            className="w-14 h-14 rounded-full   object-contain object-center shadow-none transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400"
+            className="w-14 h-14 rounded-full object-contain object-center shadow-none transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400"
           />
           <div>
             <p className="text-lg text-gray-600 font-semibold">
@@ -88,7 +117,7 @@ const FoodDetails = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center mt-4">
           <div>
-            <FaUsers className=" text-2xl mx-auto" />
+            <FaUsers className="text-2xl mx-auto" />
             <h4 className="text-gray-500 mt-1">Quantity</h4>
             <p className="text-xl font-bold">{food_quantity}</p>
           </div>
@@ -116,12 +145,79 @@ const FoodDetails = () => {
         </div>
 
         <button
-          onClick={handleRequestFood}
-          className="w-full bg-linear-to-r from-[#BC1823] to-red-500 text-white font-medium py-2 rounded  mt-4"
+          onClick={() => setShowModal(true)}
+          className="w-full bg-linear-to-r from-[#BC1823] to-red-500 text-white font-medium py-2 rounded mt-4"
         >
           Request Food
         </button>
       </div>
+
+      {showModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white rounded-xl shadow-lg p-6 w-96 relative">
+            <h2 className="text-xl font-semibold text-center text-[#BC1823] mb-4">
+              Food Request Form
+            </h2>
+            <form onSubmit={handleSubmitRequest} className="space-y-4">
+              <div>
+                <label className="text-sm font-medium">Write Location</label>
+                <input
+                  type="text"
+                  required
+                  value={formData.location}
+                  onChange={(e) =>
+                    setFormData({ ...formData, location: e.target.value })
+                  }
+                  className="w-full border rounded p-2 mt-1"
+                  placeholder="Enter your location"
+                />
+              </div>
+
+              <div>
+                <label className="text-sm font-medium">Why Need Food</label>
+                <textarea
+                  required
+                  value={formData.reason}
+                  onChange={(e) =>
+                    setFormData({ ...formData, reason: e.target.value })
+                  }
+                  className="w-full border rounded p-2 mt-1"
+                  rows="3"
+                  placeholder="Explain your reason"
+                ></textarea>
+              </div>
+
+              <div>
+                <label className="text-sm font-medium">Contact No.</label>
+                <input
+                  type="text"
+                  required
+                  value={formData.contact}
+                  onChange={(e) =>
+                    setFormData({ ...formData, contact: e.target.value })
+                  }
+                  className="w-full border rounded p-2 mt-1"
+                  placeholder="Enter your contact number"
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="w-full bg-linear-to-r from-[#BC1823] to-red-500 text-white py-2 rounded mt-2"
+              >
+                Submit Request
+              </button>
+              <button
+                type="button"
+                onClick={() => setShowModal(false)}
+                className="w-full border border-gray-400 text-gray-600 py-2 rounded mt-2"
+              >
+                Cancel
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

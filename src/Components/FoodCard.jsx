@@ -34,7 +34,7 @@ const FoodCard = ({ food }) => {
         </div>
         <div className="text-[13px] font-medium flex gap-2 items-center">
             <img src={donator_image} alt="" className="w-10 h-10 rounded-full   object-contain object-center shadow-none transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400 " />
-            <span >Donator:{donator_name}</span></div>
+            Donator:<span className="mr-1" >{donator_name}</span></div>
         
        
           <Link
