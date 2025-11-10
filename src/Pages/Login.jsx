@@ -73,7 +73,7 @@ const Login = () => {
           className="btn rounded border-gray-300 btn-sm  "
         >
           <FcGoogle size={20} />
-          Continue with Google
+          Login with Google
         </button>
 
         <p className="font-semibold text-center pt-2">

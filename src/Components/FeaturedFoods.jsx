@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router";
 import FoodCard from "../Components/FoodCard";
+import Loading from "../Pages/Loading";
 
 const FeaturedFoods = () => {
   const [foods, setFoods] = useState([]);
+    // const [loading, setLoading] = useState(true);
+  
 
   useEffect(() => {
     fetch("http://localhost:3000/featured-foods")
@@ -11,6 +14,8 @@ const FeaturedFoods = () => {
       .then((data) => setFoods(data))
       .catch((err) => console.error(err));
   }, []);
+
+  
 
   return (
     <div className="my-15">

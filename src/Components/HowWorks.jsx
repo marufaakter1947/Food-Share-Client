@@ -1,5 +1,5 @@
 import React from "react";
-import { FaUtensils, FaSearch, FaHandHoldingHeart } from "react-icons/fa";
+import {  FaSearch, FaHandHoldingHeart } from "react-icons/fa";
 import { PiBowlFoodFill } from "react-icons/pi";
 import WorksBg from "../assets/Works-bg.avif"
 

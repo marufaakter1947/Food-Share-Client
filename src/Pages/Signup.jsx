@@ -79,7 +79,7 @@ const Signup = () => {
           <CircleLoader />
         </div>
       ) : (
-        <div className="card bg-base-100 w-full mx-auto max-w-sm shadow-2xl">
+        <div className="card bg-base-100 w-full mx-auto max-w-sm shadow-2xl mt-10">
           <div className="card-body">
             <h1 className="text-3xl font-bold text-center">Register</h1>
             <form onSubmit={handleRegister}>
@@ -134,7 +134,7 @@ const Signup = () => {
               className="btn rounded border-gray-300 mt-3"
             >
               <FcGoogle size={20} />
-              Continue with Google
+              Login with Google
             </button>
 
             <p className="text-center mt-2">
