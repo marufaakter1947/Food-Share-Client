@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
 import { FaUsers, FaStar, FaCalendarAlt } from "react-icons/fa";
@@ -8,7 +8,7 @@ import Loading from "./Loading";
 
 const FoodDetails = () => {
   const { id } = useParams();
-  const { user } = useContext(AuthContext);
+//   const {} = useContext(AuthContext);
   const [food, setFood] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -21,7 +21,7 @@ const FoodDetails = () => {
       });
   }, [id]);
 
-  if (loading) return <Loading></Loading> ;
+  if (loading) return <Loading></Loading>;
 
   const {
     food_image,
@@ -33,7 +33,7 @@ const FoodDetails = () => {
     pickup_location,
     expire_date,
     additional_notes,
-    food_status
+    food_status,
   } = food;
 
   const handleRequestFood = () => {
@@ -52,7 +52,9 @@ const FoodDetails = () => {
 
       <div className="md:w-2/3 space-y-4">
         <h2 className="text-3xl font-bold text-gray-900">{food_name}</h2>
-        <p className="font-medium text-green-800">Food Status: <span className="ml-1">{food_status}</span></p>
+        <p className="font-medium text-green-800">
+          Food Status: <span className="ml-1">{food_status}</span>
+        </p>
         <div className="flex items-center gap-3 mb-2">
           <img
             src={donator_image}
@@ -60,8 +62,12 @@ const FoodDetails = () => {
             className="w-14 h-14 rounded-full   object-contain object-center shadow-none transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400"
           />
           <div>
-            <p className="text-lg text-gray-600 font-semibold">{donator_name}</p>
-            <p className="text-sm text-gray-600 font-semibold">{donator_email}</p>
+            <p className="text-lg text-gray-600 font-semibold">
+              {donator_name}
+            </p>
+            <p className="text-sm text-gray-600 font-semibold">
+              {donator_email}
+            </p>
           </div>
         </div>
 
