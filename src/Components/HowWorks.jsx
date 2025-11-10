@@ -1,18 +1,21 @@
 import React from "react";
 import { FaUtensils, FaSearch, FaHandHoldingHeart } from "react-icons/fa";
 import { PiBowlFoodFill } from "react-icons/pi";
+import WorksBg from "../assets/Works-bg.avif"
 
 const HowWorks = () => {
   return (
-    <div className="my-16 px-6">
-      <h2 className="text-3xl font-bold text-center mb-2  ">
+   <div>
+    <h2 className="text-3xl font-bold text-center mb-3   ">
          How It Works
       </h2>
-      <p className="text-center  mb-10">
+      <p className="text-center mb-10 ">
         Follow these 3 simple steps to share or receive food easily.
       </p>
+     <div className="mb-16 px-6 bg-center bg-cover bg-no-repeat rounded" style={{ backgroundImage: `url(${WorksBg})` }}>
+      
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto py-10">
         {/* Step 1 */}
         <div className="bg-white shadow-md rounded-2xl p-6 text-center hover:shadow-xl transition-all duration-300">
           <PiBowlFoodFill  className="text-[#BC1823] text-5xl mx-auto mb-4" />
@@ -44,6 +47,7 @@ const HowWorks = () => {
         </div>
       </div>
     </div>
+   </div>
   );
 };
 
