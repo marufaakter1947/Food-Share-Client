@@ -11,9 +11,7 @@ const ManageMyFoods = () => {
 
   useEffect(() => {
     if (user?.email) {
-      fetch(
-        `https://food-share-server-rust.vercel.app/my-foods?email=${user.email}`
-      )
+      fetch(`http://localhost:3000/my-foods?email=${user.email}`)
         .then((res) => res.json())
         .then((data) => {
           setMyFoods(data);
@@ -34,7 +32,7 @@ const ManageMyFoods = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://food-share-server-rust.vercel.app/my-foods/${id}`, {
+        fetch(`http://localhost:3000/my-foods/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
