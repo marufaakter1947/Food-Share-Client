@@ -20,11 +20,11 @@ const AvailableFoods = () => {
   }, [data]);
   return (
     <div>
-      <div className="text-2xl text-center font-bold mt-10 mb-2">
+      <div className="text-4xl md:text-5xl font-bold mb-4 text-[#7d161d] mt-10 text-center">
         {" "}
         All Foods
       </div>
-      <p className=" text-center mb-10 ">Explore all available Foods</p>
+      <p className=" text-lg text-gray-600 text-center mb-10 ">Explore all available Foods</p>
       {loading ? (
         <Loading />
       ) : (

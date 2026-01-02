@@ -48,7 +48,7 @@ const ContactUs = () => {
         showToast("Failed to send message ", "error");
       }
     } catch (error) {
-      showToast("Something went wrong ", "error");
+      showToast("Something went wrong ", error.message);
     } finally {
       setLoading(false);
     }
@@ -71,7 +71,7 @@ const ContactUs = () => {
 
         {/* Left Content */}
         <div className="flex flex-col justify-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 flex items-center gap-3">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-[#7d161d] flex items-center gap-3">
             <MdOutlineConnectWithoutContact /> <span>Contact Us</span>
           </h1>
 
