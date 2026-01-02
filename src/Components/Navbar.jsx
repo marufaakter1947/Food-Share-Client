@@ -7,14 +7,15 @@ import { use } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import FoodShare from "../assets/Foodshare_Logo.png";
 import logoImage from "../assets/Logo.png";
-import { MdFoodBank } from "react-icons/md";
+import { MdContactPhone, MdFoodBank } from "react-icons/md";
 import { BiFoodMenu, BiSolidFoodMenu } from "react-icons/bi";
+import { IoMdInformationCircle } from "react-icons/io";
 
 const Navbar = () => {
   const { user, signOutUser } = use(AuthContext);
 
   return (
-    <div className="navbar py-0 min-h-0 z-1 shadow-sm  glass-card max-w-7xl">
+    <div className="navbar py-0 min-h-0 z-1 shadow-sm  glass-card max-w-7xl rounded-xl">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost md:hidden">
@@ -49,6 +50,16 @@ const Navbar = () => {
                 <IoFastFoodSharp /> Available Foods
               </NavLink>
             </li>
+            <li>
+              <NavLink to={"/about-us"}>
+                <IoMdInformationCircle /> About Us
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to={"/contact-us"}>
+                <MdContactPhone /> Contact Us
+              </NavLink>
+            </li>
           </ul>
         </div>
         <Link to={"/"} className="flex items-center justify-center gap-1">
@@ -57,7 +68,7 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="navbar-center hidden md:flex">
-        <ul className="menu menu-horizontal px-1 gap-10">
+        <ul className="menu menu-horizontal px-1 gap-3">
           <li>
             <NavLink to={"/"}>
               <GoHomeFill />
@@ -67,6 +78,16 @@ const Navbar = () => {
           <li>
             <NavLink to={"/available-foods"}>
               <IoFastFoodSharp /> Available Foods
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to={"/about-us"}>
+              <IoMdInformationCircle /> About Us
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to={"/contact-us"}>
+              <MdContactPhone /> Contact Us
             </NavLink>
           </li>
         </ul>

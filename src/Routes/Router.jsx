@@ -14,6 +14,8 @@ import FoodDetails from "../Pages/FoodDetails";
 import UpdateFood from "../Pages/UpdateFood";
 import FeaturedFoods from "../Components/FeaturedFoods";
 import Loading from "../Pages/Loading";
+import AboutUs from "../Pages/AboutUs";
+import ContactUs from "../Pages/ContactUs";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +41,14 @@ const router = createBrowserRouter([
         element: <AvailableFoods></AvailableFoods>,
         loader: () =>
           fetch(`https://food-share-server-rust.vercel.app/all-foods`),
+      },
+       {
+        path: "/about-us",
+        element: <AboutUs></AboutUs>,
+      },
+       {
+        path: "/contact-us",
+        element: <ContactUs></ContactUs>
       },
       {
         path: "/featured-foods",

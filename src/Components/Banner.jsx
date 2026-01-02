@@ -11,7 +11,7 @@ const Banner = () => {
   };
 
   return (
-    <section className="w-full max-w-7xl mx-auto rounded overflow-hidden shadow-2xl font-sans">
+    <section className="w-full max-w-7xl mx-auto rounded-xl overflow-hidden shadow-2xl font-sans mt-3 ">
       <div className="flex flex-col md:flex-row h-auto md:h-[500px]">
         <div className="w-full md:w-3/5 p-8 sm:p-12 md:p-16 flex flex-col justify-center  bg-linear-to-b from-[#f6dada] to-[#ffeaea]">
           <div className="mb-4 animate-heartbeat text-[#BC1823] text-4xl flex items-center">
