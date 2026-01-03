@@ -4,7 +4,7 @@ import { AuthContext } from "../Context/AuthContext";
 
 import { GoHomeFill } from "react-icons/go";
 import { IoFastFoodSharp, IoLogIn, IoLogOut } from "react-icons/io5";
-import { MdContactPhone, MdFoodBank } from "react-icons/md";
+import { MdContactPhone, MdDashboard, MdFoodBank } from "react-icons/md";
 import { BiFoodMenu, BiSolidFoodMenu } from "react-icons/bi";
 import { IoMdInformationCircle } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
@@ -40,7 +40,10 @@ const Navbar = () => {
             <li><NavLink to={"/available-foods"}><IoFastFoodSharp /> Available Foods</NavLink></li>
             <li><NavLink to={"/about-us"}><IoMdInformationCircle /> About Us</NavLink></li>
             <li><NavLink to={"/contact-us"}><MdContactPhone /> Contact Us</NavLink></li>
-            <li><NavLink to={"/my-profile"}><CgProfile /> My Profile</NavLink></li>
+            {user && (
+       <li><NavLink to={"/my-profile"}><CgProfile /> My Profile</NavLink></li>
+    )}
+           
           </ul>
         </div>
         <Link to={"/"} className="flex items-center justify-center gap-1">
@@ -56,7 +59,8 @@ const Navbar = () => {
           <li><NavLink to={"/available-foods"}><IoFastFoodSharp /> Available Foods</NavLink></li>
           <li><NavLink to={"/about-us"}><IoMdInformationCircle /> About Us</NavLink></li>
           <li><NavLink to={"/contact-us"}><MdContactPhone /> Contact Us</NavLink></li>
-          <li><NavLink to={"/my-profile"}><CgProfile /> My Profile</NavLink></li>
+          {user && <li><NavLink to={"/my-profile"}><CgProfile /> My Profile</NavLink></li>}
+          
         </ul>
       </div>
 
@@ -77,13 +81,15 @@ const Navbar = () => {
               tabIndex="-1"
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-52 p-2 shadow"
             >
-              <div className="pb-3 border-b border-b-gray-200">
+              {/* <div className="pb-3 border-b border-b-gray-200">
                 <li className="text-sm font-bold">{user.displayName}</li>
                 <li className="text-xs">{user.email}</li>
-              </div>
-              <li className="mt-1"><Link to={"/add-food"}><MdFoodBank /> Add Food</Link></li>
+              </div> */}
+              {/* <li className="mt-1"><Link to={"/add-food"}><MdFoodBank /> Add Food</Link></li>
               <li className="mt-1"><Link to={"/manage-my-foods"}><BiFoodMenu /> Manage My Foods</Link></li>
-              <li className="mt-1"><Link to={"/my-food-request"}><BiSolidFoodMenu /> My Food Request</Link></li>
+              <li className="mt-1"><Link to={"/my-food-request"}><BiSolidFoodMenu /> My Food Request</Link></li> */}
+              <li className="mt-1"><Link to={"/dashboard"}><MdDashboard /> Dashboard</Link></li>
+              
               <li>
                 <button
                   onClick={signOutUser}

@@ -17,6 +17,8 @@ import Loading from "../Pages/Loading";
 import AboutUs from "../Pages/AboutUs";
 import ContactUs from "../Pages/ContactUs";
 import MyProfile from "../Pages/MyProfile";
+import DashboardLayout from "../Pages/DashboardLayout";
+import DashboardHome from "../Pages/DashboardHome";
 
 const router = createBrowserRouter([
   {
@@ -85,6 +87,22 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      {
+  path: "/dashboard",
+  element: (
+    <PrivateRoute>
+      <DashboardLayout />
+    </PrivateRoute>
+  ),
+  children: [
+    { index: true, element: <DashboardHome /> },
+    { path: "add-food", element: <AddFood /> },
+    { path: "manage-my-foods", element: <ManageMyFoods /> },
+    { path: "my-food-request", element: <MyFoodRequest /> },
+  ],
+}
+
+,
       {
         path: "/update-food/:id",
         element: (
