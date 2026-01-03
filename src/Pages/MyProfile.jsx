@@ -3,6 +3,9 @@ import { AuthContext } from "../Context/AuthContext";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { ImCross } from "react-icons/im";
+import { updateProfile } from "firebase/auth";
+import { auth } from "../Firebase/Firebase.config";
+
 
 const MyProfile = () => {
   const { user, setUser, loading } = useContext(AuthContext);
@@ -52,32 +55,54 @@ const MyProfile = () => {
       photoFile: file,
     }));
   };
+  const uploadImage = async (file) => {
+  const formData = new FormData();
+  formData.append("image", file);
 
-  const handleSave = async () => {
-    try {
-      setSaving(true);
+  const res = await axios.post(
+    `https://api.imgbb.com/1/upload?key=3e9a821948ab927717a3b1825cd7f54a`,
+    formData
+  );
 
-      const { _id, photoPreview, photoFile, ...rest } = profile;
+  return res.data.data.url;
+};
 
-      await axios.put(`http://localhost:3000/users/${_id}`, {
-        ...rest,
-        photo: user.photoURL || profile.photo, // only real URL
-      });
+const handleSave = async () => {
+  try {
+    setSaving(true);
 
-      setUser((prev) => ({
-        ...prev,
-        displayName: profile.name,
-        photoURL: user.photoURL,
-      }));
+    let photoURL = profile.photo;
 
-      toast.success("Profile updated");
-      setShowModal(false);
-    } catch (err) {
-      toast.error("Update failed", err.message);
-    } finally {
-      setSaving(false);
+    if (profile.photoFile) {
+      photoURL = await uploadImage(profile.photoFile);
     }
-  };
+
+    const res = await axios.put(
+      `http://localhost:3000/users/${profile._id}`,
+      {
+        name: profile.name,
+        bio: profile.bio,
+        photo: photoURL,
+      }
+    );
+
+    await updateProfile(auth.currentUser, {
+      displayName: res.data.name,
+      photoURL: res.data.photo,
+    });
+
+    setUser(auth.currentUser);
+
+    toast.success("Profile updated");
+    setShowModal(false);
+  } catch (err) {
+    console.error(err);
+    toast.error("Update failed");
+  } finally {
+    setSaving(false);
+  }
+};
+
 
   if (loading) return <p>Loading...</p>;
   if (!user) return <p>Please login to see your profile</p>;
