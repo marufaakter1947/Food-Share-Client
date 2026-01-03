@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { ImCross } from "react-icons/im";
 import { updateProfile } from "firebase/auth";
 import { auth } from "../Firebase/Firebase.config";
+// import { div } from "framer-motion/client";
 
 
 const MyProfile = () => {
@@ -86,12 +87,18 @@ const handleSave = async () => {
       }
     );
 
+    // Update Firebase profile
     await updateProfile(auth.currentUser, {
       displayName: res.data.name,
       photoURL: res.data.photo,
     });
 
-    setUser(auth.currentUser);
+    // Update AuthContext user instantly
+    setUser({
+      ...auth.currentUser,
+      displayName: res.data.name,
+      photoURL: res.data.photo,
+    });
 
     toast.success("Profile updated");
     setShowModal(false);
@@ -108,12 +115,13 @@ const handleSave = async () => {
   if (!user) return <p>Please login to see your profile</p>;
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white shadow-md rounded-xl mt-10">
+    <div className=" px-6 py-12 rounded-xl mt-3" >
+        <div className="max-w-3xl mx-auto p-6 bg-white shadow-md rounded-xl mt-10">
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-2xl font-bold text-[#BC1823]">My Profile</h2>
         <button
-          className="text-sm text-blue-600 underline"
+          className=" btn rounded bg-linear-to-r from-[#BC1823] to-red-500 text-white btn-sm"
           onClick={() => setShowModal(true)}
         >
           Update Profile
@@ -134,8 +142,8 @@ const handleSave = async () => {
           />
         </div>
         <div className="ml-4">
-          <p className="font-bold">{profile.name || user.displayName}</p>
-          <p className="text-gray-600 text-sm">{profile.email || user.email}</p>
+          <p className="font-bold">Name : {profile.name || user.displayName}</p>
+          <p className="text-gray-600 text-sm">Email Address : {profile.email || user.email}</p>
           <p className="text-gray-500 text-sm">{profile.bio}</p>
         </div>
       </div>
@@ -149,7 +157,7 @@ const handleSave = async () => {
             </h3>
 
             <button
-              className="absolute top-3 right-3 text-gray-500 hover:text-gray-800"
+              className="absolute top-3 right-3 text-gray-500 hover:text-gray-800 cursor-pointer"
               onClick={() => setShowModal(false)}
             >
               <ImCross />
@@ -168,7 +176,7 @@ const handleSave = async () => {
                 type="file"
                 accept="image/*"
                 onChange={handlePhotoChange}
-                className="ml-3 text-sm"
+                className="ml-3 text-sm cursor-pointer"
               />
             </div>
 
@@ -197,7 +205,7 @@ const handleSave = async () => {
             </div>
 
             <button
-              className="bg-[#BC1823] text-white px-4 py-1 rounded hover:bg-red-700 text-sm"
+              className="bg-[#BC1823] text-white px-4 py-1 rounded hover:bg-red-700 text-sm cursor-pointer"
               onClick={handleSave}
               disabled={saving}
             >
@@ -206,6 +214,7 @@ const handleSave = async () => {
           </div>
         </div>
       )}
+    </div>
     </div>
   );
 };
