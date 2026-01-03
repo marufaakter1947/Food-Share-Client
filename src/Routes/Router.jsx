@@ -16,6 +16,7 @@ import FeaturedFoods from "../Components/FeaturedFoods";
 import Loading from "../Pages/Loading";
 import AboutUs from "../Pages/AboutUs";
 import ContactUs from "../Pages/ContactUs";
+import MyProfile from "../Pages/MyProfile";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,14 @@ const router = createBrowserRouter([
         element: <ContactUs></ContactUs>
       },
       {
+        path: "/my-profile",
+        element: (
+          <PrivateRoute>
+            <MyProfile />
+          </PrivateRoute>
+        ),
+      },
+      {
         path: "/featured-foods",
         element: <FeaturedFoods></FeaturedFoods>,
       },
@@ -58,7 +67,6 @@ const router = createBrowserRouter([
         path: "/food-details/:id",
         element: (
             <FoodDetails />
-          
         ),
       },
       {

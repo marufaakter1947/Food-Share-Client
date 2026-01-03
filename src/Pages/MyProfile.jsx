@@ -1,0 +1,188 @@
+import React, { useEffect, useState, useContext } from "react";
+import { AuthContext } from "../Context/AuthContext";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { ImCross } from "react-icons/im";
+
+const MyProfile = () => {
+  const { user, setUser, loading } = useContext(AuthContext);
+  const [profile, setProfile] = useState({
+    name: "",
+    email: "",
+    bio: "",
+    photo: "",
+    _id: "",
+  });
+  const [saving, setSaving] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
+  // Fetch profile from backend when user is logged in
+  useEffect(() => {
+    if (!user) return;
+    const fetchProfile = async () => {
+      try {
+        const res = await axios.get(
+          `http://localhost:3000/users?email=${user.email}`
+        );
+        console.log("Backend user:", res.data);
+        if (res.data && res.data.length > 0) {
+          setProfile(res.data[0]);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchProfile();
+  }, [user]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setProfile({ ...profile, [name]: value });
+  };
+
+  const handlePhotoChange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const preview = URL.createObjectURL(file);
+
+    setProfile((prev) => ({
+      ...prev,
+      photoPreview: preview,
+      photoFile: file,
+    }));
+  };
+
+  const handleSave = async () => {
+    try {
+      setSaving(true);
+
+      const { _id, photoPreview, photoFile, ...rest } = profile;
+
+      await axios.put(`http://localhost:3000/users/${_id}`, {
+        ...rest,
+        photo: user.photoURL || profile.photo, // only real URL
+      });
+
+      setUser((prev) => ({
+        ...prev,
+        displayName: profile.name,
+        photoURL: user.photoURL,
+      }));
+
+      toast.success("Profile updated");
+      setShowModal(false);
+    } catch (err) {
+      toast.error("Update failed", err.message);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  if (loading) return <p>Loading...</p>;
+  if (!user) return <p>Please login to see your profile</p>;
+
+  return (
+    <div className="max-w-3xl mx-auto p-6 bg-white shadow-md rounded-xl mt-10">
+      {/* Header */}
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-2xl font-bold text-[#BC1823]">My Profile</h2>
+        <button
+          className="text-sm text-blue-600 underline"
+          onClick={() => setShowModal(true)}
+        >
+          Update Profile
+        </button>
+      </div>
+
+      {/* Display profile info */}
+      <div className="flex items-center mb-4">
+        <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-gray-300">
+          <img
+            src={
+              profile.photo ||
+              user.photoURL ||
+              "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+            }
+            alt="Profile"
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="ml-4">
+          <p className="font-bold">{profile.name || user.displayName}</p>
+          <p className="text-gray-600 text-sm">{profile.email || user.email}</p>
+          <p className="text-gray-500 text-sm">{profile.bio}</p>
+        </div>
+      </div>
+
+      {/* Modal */}
+      {showModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white rounded-lg shadow-lg w-full max-w-md p-6 relative">
+            <h3 className="text-lg font-bold mb-4 text-[#BC1823]">
+              Update Profile
+            </h3>
+
+            <button
+              className="absolute top-3 right-3 text-gray-500 hover:text-gray-800"
+              onClick={() => setShowModal(false)}
+            >
+              <ImCross />
+            </button>
+
+            {/* Photo */}
+            <div className="flex items-center mb-4">
+              <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-gray-300">
+                <img
+                  src={profile.photoPreview || profile.photo || user.photoURL}
+                  alt="Profile"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handlePhotoChange}
+                className="ml-3 text-sm"
+              />
+            </div>
+
+            {/* Name */}
+            <div className="mb-3">
+              <label className="block text-gray-700 text-sm mb-1">Name</label>
+              <input
+                type="text"
+                name="name"
+                value={profile.name}
+                onChange={handleChange}
+                className="w-full border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-[#BC1823]"
+              />
+            </div>
+
+            {/* Bio */}
+            <div className="mb-3">
+              <label className="block text-gray-700 text-sm mb-1">Bio</label>
+              <textarea
+                name="bio"
+                value={profile.bio}
+                onChange={handleChange}
+                rows="2"
+                className="w-full border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-[#BC1823]"
+              />
+            </div>
+
+            <button
+              className="bg-[#BC1823] text-white px-4 py-1 rounded hover:bg-red-700 text-sm"
+              onClick={handleSave}
+              disabled={saving}
+            >
+              {saving ? "Saving..." : "Save"}
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default MyProfile;

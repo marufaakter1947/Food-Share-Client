@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 import { CircleLoader } from "react-spinners";
 import { auth } from "../Firebase/Firebase.config";
+import axios from "axios";
 
 const Signup = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -44,20 +45,46 @@ const Signup = () => {
       return setIsSubmitting(false);
     }
 
-    createUser(email, password)
-      .then(() => {
-        updateUserProfile(displayName, photoURL)
-          .then(() => {
-            setUser({ ...auth.currentUser });
-            setLoading(false);
-            toast.dismiss();
-            toast.success("Signup Successful ");
-            navigate("/");
-          })
-          .catch((error) => toast.error(error.message));
+  //   createUser(email, password)
+  //     .then(() => {
+  //       updateUserProfile(displayName, photoURL)
+  //         .then(() => {
+  //           setUser({ ...auth.currentUser });
+  //           setLoading(false);
+  //           toast.dismiss();
+  //           toast.success("Signup Successful ");
+  //           navigate("/");
+  //         })
+  //         .catch((error) => toast.error(error.message));
+  //     })
+  //     .catch((error) => toast.error(error.message))
+  //     .finally(() => setIsSubmitting(false));
+  // };
+  createUser(email, password)
+  .then(() => {
+    updateUserProfile(displayName, photoURL)
+      .then(async () => {
+        // Insert user into MongoDB
+        try {
+          await axios.post("http://localhost:3000/users", {
+            name: displayName,
+            email,
+            photo: photoURL,
+          });
+          toast.success("Signup Successful");
+        } catch (err) {
+          toast.error("Signup successful but failed to save DB");
+          console.error(err);
+        }
+
+        setUser({ ...auth.currentUser });
+        setLoading(false);
+        navigate("/");
       })
-      .catch((error) => toast.error(error.message))
-      .finally(() => setIsSubmitting(false));
+      .catch((error) => toast.error(error.message));
+  })
+  .catch((error) => toast.error(error.message))
+  .finally(() => setIsSubmitting(false));
   };
 
   const handleGoogleSignIn = () => {
