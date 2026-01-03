@@ -93,7 +93,7 @@ const ManageMyFoods = () => {
                     <td>{food.pickup_location}</td>
                     <td>{food.expire_date}</td>
                     <td className="space-x-2">
-                      <Link to={`/update-food/${food._id}`}>
+                      <Link to={`/dashboard/update-food/${food._id}`}>
                         <button className="px-3 py-1 bg-teal-600 text-white rounded">
                           Update
                         </button>
@@ -136,7 +136,7 @@ const ManageMyFoods = () => {
                   {food.expire_date}
                 </p>
                 <div className="flex justify-end gap-2 mt-3">
-                  <Link to={`/update-food/${food._id}`}>
+                  <Link to={`/dashboard/update-food/${food._id}`}>
                     <button className="px-3 py-1 bg-teal-600 text-white rounded text-sm">
                       Update
                     </button>

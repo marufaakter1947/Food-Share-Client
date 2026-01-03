@@ -40,7 +40,7 @@ const UpdateFood = () => {
           timer: 1500,
           showConfirmButton: false,
         });
-        navigate("/manage-my-foods");
+        navigate("/dashboard/manage-my-foods");
       });
   };
 
