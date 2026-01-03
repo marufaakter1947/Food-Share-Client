@@ -1,7 +1,9 @@
 import React from "react";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 
 const FoodCard = ({ food }) => {
+  const location = useLocation();
+  const isDashboard = location.pathname.startsWith("/dashboard");
   const {
     _id,
     food_image,
@@ -32,7 +34,8 @@ const FoodCard = ({ food }) => {
         
 
         <Link
-          to={`/food-details/${_id}`}
+          to={
+           isDashboard ? `/dashboard/food-details/${_id}` : `/food-details/${_id}`}
           className="btn rounded bg-linear-to-r from-[#BC1823] to-red-500 text-white w-full btn-sm"
         >
           View Details

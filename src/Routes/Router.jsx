@@ -172,6 +172,14 @@ const router = createBrowserRouter([
       { path: "contact-us", element: <ContactUs /> },
       { path: "featured-foods", element: <FeaturedFoods /> },
       { path: "food-details/:id", element: <FoodDetails /> },
+      {
+  path: "/dashboard/food-details/:id",
+  element: (
+    <PrivateRoute>
+      <FoodDetails />
+    </PrivateRoute>
+  ),
+},
 
       {
         path: "my-profile",
