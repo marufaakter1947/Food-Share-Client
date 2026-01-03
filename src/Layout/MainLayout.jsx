@@ -6,8 +6,8 @@ import Navbar from "../Components/Navbar";
 
 const MainLayout = () => {
   return (
-    <div className="bg-[#F5F5F5] px-5">
-      <div className="max-w-7xl mx-auto">
+    <div className="bg-[#F5F5F5] overflow-x-hidden">
+      <div className="max-w-7xl mx-auto px-5">
         <Navbar />
         <div className="">
           <Outlet />
