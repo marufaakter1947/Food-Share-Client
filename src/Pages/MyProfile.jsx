@@ -5,6 +5,8 @@ import toast from "react-hot-toast";
 import { ImCross } from "react-icons/im";
 import { updateProfile } from "firebase/auth";
 import { auth } from "../Firebase/Firebase.config";
+import profileBg from "../assets/profile-bg.png"
+
 // import { div } from "framer-motion/client";
 
 
@@ -115,8 +117,10 @@ const handleSave = async () => {
   if (!user) return <p>Please login to see your profile</p>;
 
   return (
-    <div className=" px-6 py-12 rounded-xl mt-3" >
-        <div className="max-w-3xl mx-auto p-6 bg-white shadow-md rounded-xl mt-10">
+    <div className="px-6 py-12 rounded-xl mt-3 bg-cover bg-center relative"
+  style={{ backgroundImage: `url(${profileBg})` }} >
+       
+         <div className="max-w-3xl mx-auto p-6 bg-opacity-90 bg-white shadow-md rounded-xl mt-10">
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-2xl font-bold text-[#BC1823]">My Profile</h2>
@@ -215,6 +219,7 @@ const handleSave = async () => {
         </div>
       )}
     </div>
+       
     </div>
   );
 };
